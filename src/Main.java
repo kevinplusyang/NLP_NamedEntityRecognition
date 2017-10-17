@@ -31,118 +31,120 @@ public class Main {
 
 
 
-        try {
-            File file = new File("./src/train.txt");
-            FileReader fileReader = new FileReader(file);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            StringBuffer stringBuffer = new StringBuffer();
-            String line;
-            int i = 0;
-            String line1 = "";
-            String line2 = "";
-            String line3 = "";
-            while ((line = bufferedReader.readLine()) != null) {
+//        try {
+//            File file = new File("./src/train.txt");
+//            FileReader fileReader = new FileReader(file);
+//            BufferedReader bufferedReader = new BufferedReader(fileReader);
+//            StringBuffer stringBuffer = new StringBuffer();
+//            String line;
+//            int i = 0;
+//            String line1 = "";
+//            String line2 = "";
+//            String line3 = "";
+//            while ((line = bufferedReader.readLine()) != null) {
+//
+//                if (i == 0) {
+//                    line1 = line.toString();
+//                    i++;
+//                } else if (i == 1) {
+//                    line2 = line.toString();
+//                    i++;
+//                } else if (i == 2) {
+//                    line3 = line.toString();
+//                    i++;
+//                }
+//
+//                if (i == 3) {
+//                    String[] line1Array = line1.split("\t");
+//                    String[] line2Array = line2.split("\t");
+//                    String[] line3Array = line3.split("\t");
+//
+//                    handleLine(line1Array, line2Array, line3Array);
+//
+//                    i = 0;
+//                    line1 = "";
+//                    line2 = "";
+//                    line3 = "";
+//                }
+//
+//
+//            }
+//            fileReader.close();
+//
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        try {
+//            File file = new File("./src/test.txt");
+//            FileReader fileReader = new FileReader(file);
+//            BufferedReader bufferedReader = new BufferedReader(fileReader);
+//            StringBuffer stringBuffer = new StringBuffer();
+//            String line;
+//            int i = 0;
+//            String line1 = "";
+//            while ((line = bufferedReader.readLine()) != null) {
+//
+//
+//                for (String tempWord : line.split("\t")) {
+//                    testSet.add(tempWord);
+//                }
+//
+//                line = bufferedReader.readLine();
+//                line = bufferedReader.readLine();
+//
+//
+//
+//            }
+//            fileReader.close();
+//
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        map.put("PER", new ArrayList<>());
+//        map.put("LOC", new ArrayList<>());
+//        map.put("ORG", new ArrayList<>());
+//        map.put("MISC", new ArrayList<>());
+//
+//
+//        search();
+//
+//
+//        System.out.println("PER Result:");
+//        for (String result : map.get("PER")) {
+//            System.out.print(result);
+//            System.out.print(" ");
+//        }
+//
+//        System.out.println("");
+//        System.out.println("PER LOC:");
+//
+//        for (String result : map.get("LOC")) {
+//            System.out.print(result);
+//            System.out.print(" ");
+//        }
+//
+//        System.out.println("");
+//        System.out.println("PER ORG:");
+//
+//
+//        for (String result : map.get("ORG")) {
+//            System.out.print(result);
+//            System.out.print(" ");
+//        }
+//
+//        System.out.println("");
+//        System.out.println("PER MISC:");
+//
+//        for (String result : map.get("MISC")) {
+//            System.out.print(result);
+//            System.out.print(" ");
+//        }
 
-                if (i == 0) {
-                    line1 = line.toString();
-                    i++;
-                } else if (i == 1) {
-                    line2 = line.toString();
-                    i++;
-                } else if (i == 2) {
-                    line3 = line.toString();
-                    i++;
-                }
-
-                if (i == 3) {
-                    String[] line1Array = line1.split("\t");
-                    String[] line2Array = line2.split("\t");
-                    String[] line3Array = line3.split("\t");
-
-                    handleLine(line1Array, line2Array, line3Array);
-
-                    i = 0;
-                    line1 = "";
-                    line2 = "";
-                    line3 = "";
-                }
-
-
-            }
-            fileReader.close();
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            File file = new File("./src/test.txt");
-            FileReader fileReader = new FileReader(file);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            StringBuffer stringBuffer = new StringBuffer();
-            String line;
-            int i = 0;
-            String line1 = "";
-            while ((line = bufferedReader.readLine()) != null) {
-
-
-                for (String tempWord : line.split("\t")) {
-                    testSet.add(tempWord);
-                }
-
-                line = bufferedReader.readLine();
-                line = bufferedReader.readLine();
-
-
-
-            }
-            fileReader.close();
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        map.put("PER", new ArrayList<>());
-        map.put("LOC", new ArrayList<>());
-        map.put("ORG", new ArrayList<>());
-        map.put("MISC", new ArrayList<>());
-
-
-        search();
-
-
-        System.out.println("PER Result:");
-        for (String result : map.get("PER")) {
-            System.out.print(result);
-            System.out.print(" ");
-        }
-
-        System.out.println("");
-        System.out.println("PER LOC:");
-        
-        for (String result : map.get("LOC")) {
-            System.out.print(result);
-            System.out.print(" ");
-        }
-
-        System.out.println("");
-        System.out.println("PER ORG:");
-
-
-        for (String result : map.get("ORG")) {
-            System.out.print(result);
-            System.out.print(" ");
-        }
-
-        System.out.println("");
-        System.out.println("PER MISC:");
-
-        for (String result : map.get("MISC")) {
-            System.out.print(result);
-            System.out.print(" ");
-        }
+        part2();
 
 
     }
@@ -227,4 +229,103 @@ public class Main {
         }
 
     }
+
+
+    static HashMap<String,HashMap<String, HashMap<String, Integer>>> map1 = new HashMap<>();
+    static HashMap<String, Integer> namedTagCountMap = new HashMap<>();
+
+
+    private static void part2() {
+
+        namedTagCountMap.put("B-PER", 0);
+        namedTagCountMap.put("I-PER", 0);
+        namedTagCountMap.put("B-LOC", 0);
+        namedTagCountMap.put("I-LOC", 0);
+        namedTagCountMap.put("B-ORG", 0);
+        namedTagCountMap.put("I-ORG", 0);
+        namedTagCountMap.put("B-MISC", 0);
+        namedTagCountMap.put("I-MISC", 0);
+        namedTagCountMap.put("O", 0);
+        namedTagCountMap.put("*", 0);
+
+        try {
+            File file = new File("./src/train.txt");
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            StringBuffer stringBuffer = new StringBuffer();
+            String line;
+            int i = 0;
+            String line1 = "";
+            String line2 = "";
+            String line3 = "";
+            while ((line = bufferedReader.readLine()) != null) {
+
+                if (i == 0) {
+                    line1 = line.toString();
+                    i++;
+                } else if (i == 1) {
+                    line2 = line.toString();
+                    i++;
+                } else if (i == 2) {
+                    line3 = line.toString();
+                    i++;
+                }
+
+                if (i == 3) {
+                    String[] line1Array = line1.split("\t");
+                    String[] line2Array = line2.split("\t");
+                    String[] line3Array = line3.split("\t");
+
+
+
+                    i = 0;
+                    line1 = "";
+                    line2 = "";
+                    line3 = "";
+                    handleLineForPart2(line1Array, line2Array, line3Array);
+                }
+
+
+
+            }
+            fileReader.close();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(map1.get("B-MISC").get("JJ").get("American"));
+
+
+    }
+
+
+    private static void handleLineForPart2(String[] line1Array, String[] line2Array, String[] line3Array){
+
+
+        for (int i = 0; i < line3Array.length; i++) {
+
+            if (!map1.containsKey(line3Array[i])) {
+                map1.put(line3Array[i], new HashMap<>());
+            }
+
+            if (!map1.get(line3Array[i]).containsKey(line2Array[i])) {
+                map1.get(line3Array[i]).put(line2Array[i], new HashMap<>());
+            }
+
+            if (!map1.get(line3Array[i]).get(line2Array[i]).containsKey(line1Array[i])) {
+                map1.get(line3Array[i]).get(line2Array[i]).put(line1Array[i], 0);
+            }
+
+            map1.get(line3Array[i]).get(line2Array[i]).put(line1Array[i], map1.get(line3Array[i]).get(line2Array[i]).get(line1Array[i]) + 1);
+
+            namedTagCountMap.put(line3Array[i], namedTagCountMap.get(line3Array[i]) + 1);
+        }
+
+
+    }
+
+
+
 }
