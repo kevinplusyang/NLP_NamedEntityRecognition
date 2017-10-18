@@ -313,13 +313,14 @@ public class Main {
             e.printStackTrace();
         }
 
-//        System.out.println(map1.get("O").get("CD").get("1"));
-//        System.out.println(mapStatus.get("B-ORG").get("I-ORG"));
+//        System.out.println(map1.get("B-LOC").get("NNP").get("DETROIT"));
+//        System.out.println(mapStatus.get("O").get("B-LOC"));
+//        System.out.println(namedTagCountMap.get("B-LOC"));
 
 
 
         try {
-            File file = new File("./src/tt.txt");
+            File file = new File("./src/test.txt");
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line;
@@ -363,6 +364,8 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        System.out.println(resultList.size());
 
 
 
@@ -469,14 +472,9 @@ public class Main {
                         tempScore = (double)1;
                     }
 
-
-
                     scoreMatrix[j][i] =  Math.log((double) tempScore / namedTagCountMap.get(namedTagArray[j]));
 
                     scoreMatrix[j][i] += maxValue;
-
-
-
 
                 }
 
@@ -484,82 +482,36 @@ public class Main {
 
         }
 
-        int maxTag = 100;
-        double maxValue = -Double.MAX_VALUE;
+        int maxTag = 0;
+        double maxValue = scoreMatrix[0][line1Array.length - 1];
 
         for (int i = 0 ; i < 9; i++) {
 
             if (scoreMatrix[i][line1Array.length - 1] > maxValue) {
 
                 maxValue = scoreMatrix[i][line1Array.length - 1];
-                maxTag = tagMatrix[i][line1Array.length - 1];
+                maxTag = i;
             }
         }
-
-        System.out.println(maxTag);
-
-
-
-
-
-//        int[] tempResult = new int[line1Array.length];
-//        tempResult[line1Array.length - 1] = maxTag;
-//
-//        for (int i = line1Array.length - 2; i >= 0; i--) {
-//
-//            maxTag = tagMatrix[maxTag][i + 1];
-//            tempResult[i] = maxTag;
-//        }
-//
-//        for (int i = 0 ; i < tempResult.length ;i++) {
-//            System.out.print(tempResult[i]);
-//
-//        }
-//        System.out.println("");
-
-
-
-
-        System.out.println("==========");
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < line1Array.length; j++) {
-
-               System.out.print(scoreMatrix[i][j] + " ");
-
-
-            }
-            System.out.println("");
-        }
-
-        System.out.println("==========");
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < line1Array.length; j++) {
-
-                System.out.print(tagMatrix[i][j] + " ");
-
-
-            }
-            System.out.println("");
-        }
-
 
 //        System.out.println(maxTag);
-//        System.out.println("==========");
-//        for (int i = 0; i < 9; i++) {
-//            for (int j = 0; j < line1Array.length; j++) {
-//
-//
-//                    if (tagMatrix[i][j] >= 9) {
-//                        System.out.println("ERROR");
-//                        System.out.println("i" + i);
-//                        System.out.println("j" + j);
-//
-//                    }
-//
-//
-//
-//            }
-//        }
+
+
+
+        int[] tempResult = new int[line1Array.length];
+        tempResult[line1Array.length - 1] = maxTag;
+
+        for (int i = line1Array.length - 2; i >= 0; i--) {
+
+            maxTag = tagMatrix[maxTag][i + 1];
+            tempResult[i] = maxTag;
+        }
+
+
+        for (int i = 0 ; i < tempResult.length ;i++) {
+            resultList.add(tempResult[i]);
+        }
+
 
     }
 
