@@ -233,6 +233,7 @@ public class Main {
 
     static HashMap<String,HashMap<String, HashMap<String, Integer>>> map1 = new HashMap<>();
     static HashMap<String, Integer> namedTagCountMap = new HashMap<>();
+    static HashMap<String, HashMap<String, Integer>> mapStatus = new HashMap<>();
 
 
     private static void part2() {
@@ -247,6 +248,22 @@ public class Main {
         namedTagCountMap.put("I-MISC", 0);
         namedTagCountMap.put("O", 0);
         namedTagCountMap.put("*", 0);
+
+
+        String[] tempArray = {"B-PER", "I-PER", "B-LOC", "I-LOC", "B-ORG", "I-ORG", "B-MISC", "I-MISC", "O", "*"};
+        String[] tempArray2 = {"B-PER", "I-PER", "B-LOC", "I-LOC", "B-ORG", "I-ORG", "B-MISC", "I-MISC", "O", "*"};
+
+        for (String temp1 : tempArray) {
+            HashMap<String, Integer> tMap = new HashMap<>();
+            mapStatus.put(temp1, tMap);
+        }
+
+        for (String temp1 : tempArray) {
+            for (String temp2 : tempArray2) {
+                mapStatus.get(temp1).put(temp2, 0);
+            }
+        }
+
 
         try {
             File file = new File("./src/train.txt");
@@ -295,14 +312,65 @@ public class Main {
             e.printStackTrace();
         }
 
-        System.out.println(map1.get("B-MISC").get("JJ").get("American"));
+//        System.out.println(map1.get("B-MISC").get("JJ").get("American"));
+        System.out.println(mapStatus.get("B-ORG").get("I-ORG"));
 
+
+
+        try {
+            File file = new File("./src/test.txt");
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line;
+            int i = 0;
+            String line1 = "";
+            String line2 = "";
+            String line3 = "";
+            while ((line = bufferedReader.readLine()) != null) {
+
+                if (i == 0) {
+                    line1 = line.toString();
+                    i++;
+                } else if (i == 1) {
+                    line2 = line.toString();
+                    i++;
+                } else if (i == 2) {
+                    line3 = line.toString();
+                    i++;
+                }
+
+                if (i == 3) {
+                    String[] line1Array = line1.split("\t");
+                    String[] line2Array = line2.split("\t");
+                    String[] line3Array = line3.split("\t");
+
+
+
+                    i = 0;
+                    line1 = "";
+                    line2 = "";
+                    line3 = "";
+                    tag(line1Array, line2Array, line3Array);
+                }
+
+
+
+            }
+            fileReader.close();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
 
+
+
     private static void handleLineForPart2(String[] line1Array, String[] line2Array, String[] line3Array){
 
+        namedTagCountMap.put("*", namedTagCountMap.get("*") + 1);
 
         for (int i = 0; i < line3Array.length; i++) {
 
@@ -321,11 +389,88 @@ public class Main {
             map1.get(line3Array[i]).get(line2Array[i]).put(line1Array[i], map1.get(line3Array[i]).get(line2Array[i]).get(line1Array[i]) + 1);
 
             namedTagCountMap.put(line3Array[i], namedTagCountMap.get(line3Array[i]) + 1);
+
+            if (i == 0) {
+
+                mapStatus.get("*").put(line3Array[i], mapStatus.get("*").get(line3Array[i]) + 1);
+            } else {
+                mapStatus.get(line3Array[i - 1]).put(line3Array[i], mapStatus.get(line3Array[i - 1]).get(line3Array[i]) + 1);
+            }
         }
 
 
     }
 
 
+    private static void tag(String[] line1Array, String[] line2Array, String[] line3Array) {
+
+        String[] namedTagArray = {"B-PER", "I-PER", "B-LOC", "I-LOC", "B-ORG", "I-ORG", "B-MISC", "I-MISC", "O"};
+
+        double[][] scoreMatrix = new double[9][line1Array.length];
+        int[][] tagMatrix = new int[9][line1Array.length];
+
+        for (int i = 0; i < line1Array.length; i++) {
+            String word = line1Array[i];
+            String posTag = line2Array[i];
+
+            if (i == 0) {
+                for (int j = 0; j < 9; j++) {
+                    double tempScore = 0;
+
+                    try {
+                        tempScore = (double)map1.get(namedTagArray[j]).get(posTag).getOrDefault(word, 1) / namedTagCountMap.get(namedTagArray[j]);
+
+                    } catch (NullPointerException e) {
+                        tempScore = 1 / namedTagCountMap.get(namedTagArray[j]);
+                    }
+
+                    tempScore = tempScore * mapStatus.get("*").get(namedTagArray[j]) / namedTagCountMap.get("*");
+                    scoreMatrix[j][i] = tempScore;
+                    tagMatrix[j][i] = 9;
+                }
+            } else {
+                for (int j = 0 ; j < 9; j++) {
+
+                    double[] tempMax = new double[9];
+                    for (int k = 0; k < 9; k++) {
+                        double tempInsideSocre = (double)mapStatus.get(namedTagArray[k]).get(namedTagArray[j]) / namedTagCountMap.get(namedTagArray[k]);
+                        tempInsideSocre = tempInsideSocre * scoreMatrix[k][i - 1];
+                        tempMax[k] = tempInsideSocre;
+                    }
+                    int maxTag = 0;
+                    double maxValue = -1;
+                    for (int k = 0; k < 9; k++) {
+                        if (tempMax[k] > maxValue) {
+                            maxValue = tempMax[k];
+                            maxTag = k;
+                        }
+                    }
+                    tagMatrix[j][i] = maxTag;
+
+                    double tempScore = 0;
+
+                    try {
+                        tempScore = (double)map1.get(namedTagArray[j]).get(posTag).getOrDefault(word, 1);
+
+                    } catch (NullPointerException e) {
+                        tempScore = 1;
+                    }
+
+                    System.out.println(tempScore);
+
+                    scoreMatrix[j][i] =  tempScore / namedTagCountMap.get(namedTagArray[j]);
+
+                    scoreMatrix[j][i] *= maxValue;
+                    scoreMatrix[j][i] = Math.log(scoreMatrix[j][i]);
+                    
+                    System.out.println(Math.log(scoreMatrix[j][i]));
+
+                }
+
+            }
+
+
+        }
+    }
 
 }
