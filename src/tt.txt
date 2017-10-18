@@ -1,0 +1,3 @@
+Cleveland	2	DETROIT	1
+NNP	CD	NNP	CD
+B-ORG	O	B-ORG	O

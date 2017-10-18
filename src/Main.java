@@ -234,6 +234,7 @@ public class Main {
     static HashMap<String,HashMap<String, HashMap<String, Integer>>> map1 = new HashMap<>();
     static HashMap<String, Integer> namedTagCountMap = new HashMap<>();
     static HashMap<String, HashMap<String, Integer>> mapStatus = new HashMap<>();
+    static ArrayList<Integer> resultList = new ArrayList<>();
 
 
     private static void part2() {
@@ -312,13 +313,13 @@ public class Main {
             e.printStackTrace();
         }
 
-//        System.out.println(map1.get("B-MISC").get("JJ").get("American"));
-        System.out.println(mapStatus.get("B-ORG").get("I-ORG"));
+//        System.out.println(map1.get("O").get("CD").get("1"));
+//        System.out.println(mapStatus.get("B-ORG").get("I-ORG"));
 
 
 
         try {
-            File file = new File("./src/test.txt");
+            File file = new File("./src/tt.txt");
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line;
@@ -363,6 +364,8 @@ public class Main {
             e.printStackTrace();
         }
 
+
+
     }
 
 
@@ -399,6 +402,7 @@ public class Main {
         }
 
 
+
     }
 
 
@@ -407,7 +411,9 @@ public class Main {
         String[] namedTagArray = {"B-PER", "I-PER", "B-LOC", "I-LOC", "B-ORG", "I-ORG", "B-MISC", "I-MISC", "O"};
 
         double[][] scoreMatrix = new double[9][line1Array.length];
+
         int[][] tagMatrix = new int[9][line1Array.length];
+
 
         for (int i = 0; i < line1Array.length; i++) {
             String word = line1Array[i];
@@ -415,16 +421,21 @@ public class Main {
 
             if (i == 0) {
                 for (int j = 0; j < 9; j++) {
-                    double tempScore = 0;
+                    double tempScore;
 
                     try {
                         tempScore = (double)map1.get(namedTagArray[j]).get(posTag).getOrDefault(word, 1) / namedTagCountMap.get(namedTagArray[j]);
 
                     } catch (NullPointerException e) {
-                        tempScore = 1 / namedTagCountMap.get(namedTagArray[j]);
+                        tempScore = (double)1 / namedTagCountMap.get(namedTagArray[j]);
                     }
 
-                    tempScore = tempScore * mapStatus.get("*").get(namedTagArray[j]) / namedTagCountMap.get("*");
+
+//                    System.out.println(tempScore);
+                    tempScore = Math.log(tempScore);
+
+
+                    tempScore = tempScore + Math.log( (double)mapStatus.get("*").get(namedTagArray[j]) / namedTagCountMap.get("*"));
                     scoreMatrix[j][i] = tempScore;
                     tagMatrix[j][i] = 9;
                 }
@@ -433,12 +444,14 @@ public class Main {
 
                     double[] tempMax = new double[9];
                     for (int k = 0; k < 9; k++) {
+
                         double tempInsideSocre = (double)mapStatus.get(namedTagArray[k]).get(namedTagArray[j]) / namedTagCountMap.get(namedTagArray[k]);
-                        tempInsideSocre = tempInsideSocre * scoreMatrix[k][i - 1];
+                        tempInsideSocre = Math.log(tempInsideSocre);
+                        tempInsideSocre = tempInsideSocre + scoreMatrix[k][i - 1];
                         tempMax[k] = tempInsideSocre;
                     }
                     int maxTag = 0;
-                    double maxValue = -1;
+                    double maxValue = tempMax[0];
                     for (int k = 0; k < 9; k++) {
                         if (tempMax[k] > maxValue) {
                             maxValue = tempMax[k];
@@ -453,24 +466,101 @@ public class Main {
                         tempScore = (double)map1.get(namedTagArray[j]).get(posTag).getOrDefault(word, 1);
 
                     } catch (NullPointerException e) {
-                        tempScore = 1;
+                        tempScore = (double)1;
                     }
 
-                    System.out.println(tempScore);
 
-                    scoreMatrix[j][i] =  tempScore / namedTagCountMap.get(namedTagArray[j]);
 
-                    scoreMatrix[j][i] *= maxValue;
-                    scoreMatrix[j][i] = Math.log(scoreMatrix[j][i]);
-                    
-                    System.out.println(Math.log(scoreMatrix[j][i]));
+                    scoreMatrix[j][i] =  Math.log((double) tempScore / namedTagCountMap.get(namedTagArray[j]));
+
+                    scoreMatrix[j][i] += maxValue;
+
+
+
 
                 }
 
             }
 
-
         }
+
+        int maxTag = 100;
+        double maxValue = -Double.MAX_VALUE;
+
+        for (int i = 0 ; i < 9; i++) {
+
+            if (scoreMatrix[i][line1Array.length - 1] > maxValue) {
+
+                maxValue = scoreMatrix[i][line1Array.length - 1];
+                maxTag = tagMatrix[i][line1Array.length - 1];
+            }
+        }
+
+        System.out.println(maxTag);
+
+
+
+
+
+//        int[] tempResult = new int[line1Array.length];
+//        tempResult[line1Array.length - 1] = maxTag;
+//
+//        for (int i = line1Array.length - 2; i >= 0; i--) {
+//
+//            maxTag = tagMatrix[maxTag][i + 1];
+//            tempResult[i] = maxTag;
+//        }
+//
+//        for (int i = 0 ; i < tempResult.length ;i++) {
+//            System.out.print(tempResult[i]);
+//
+//        }
+//        System.out.println("");
+
+
+
+
+        System.out.println("==========");
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < line1Array.length; j++) {
+
+               System.out.print(scoreMatrix[i][j] + " ");
+
+
+            }
+            System.out.println("");
+        }
+
+        System.out.println("==========");
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < line1Array.length; j++) {
+
+                System.out.print(tagMatrix[i][j] + " ");
+
+
+            }
+            System.out.println("");
+        }
+
+
+//        System.out.println(maxTag);
+//        System.out.println("==========");
+//        for (int i = 0; i < 9; i++) {
+//            for (int j = 0; j < line1Array.length; j++) {
+//
+//
+//                    if (tagMatrix[i][j] >= 9) {
+//                        System.out.println("ERROR");
+//                        System.out.println("i" + i);
+//                        System.out.println("j" + j);
+//
+//                    }
+//
+//
+//
+//            }
+//        }
+
     }
 
 }
