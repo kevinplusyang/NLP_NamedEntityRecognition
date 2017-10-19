@@ -2,11 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d9633802-45c7-4fc5-803b-e52b6007044d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/submit.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/train_holdout.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/train_holdout_tag3.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/train_holdout_tag_index.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/train_split.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/NLP_NamedEntityRecognition/Main.class" afterPath="$PROJECT_DIR$/out/production/NLP_NamedEntityRecognition/Main.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tt.txt" afterPath="$PROJECT_DIR$/src/tt.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/submit.csv" afterPath="$PROJECT_DIR$/submit.csv" />
     </list>
     <ignored path="NLP_NamedEntityRecognition.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,27 +31,68 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="401" column="24" selection-start-line="401" selection-start-column="24" selection-end-line="401" selection-end-column="24" />
+            <state relative-caret-position="2082">
+              <caret line="668" column="45" selection-start-line="668" selection-start-column="45" selection-end-line="668" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#handleLine#0;class#Main#0" expanded="false" />
                 <element signature="method#insertWord#0;class#Main#0" expanded="false" />
                 <element signature="method#search#0;class#Main#0" expanded="false" />
                 <element signature="method#handleLineForPart2#0;class#Main#0" expanded="false" />
+                <element signature="method#tag2#0;class#Main#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="submit.csv" pinned="false" current-in-tab="true">
+      <file leaf-file-name="train_holdout_tag3.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/train_holdout_tag3.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="train_holdout.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/train_holdout.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="train_split.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/train_split.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="train_holdout_tag_index.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/train_holdout_tag_index.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="37" selection-start-line="1" selection-start-column="32" selection-end-line="1" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="submit.csv" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/submit.csv">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
-              <caret line="4" column="32764" selection-start-line="4" selection-start-column="32764" selection-end-line="4" selection-end-column="32764" />
+              <caret line="4" column="8" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -57,8 +101,8 @@
       <file leaf-file-name="tt.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tt.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="7" selection-end-column="14" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -67,8 +111,8 @@
       <file leaf-file-name="train.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/out/production/project2/train.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="37" />
+            <state relative-caret-position="270">
+              <caret line="3875" column="0" selection-start-line="3875" selection-start-column="0" selection-end-line="3877" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -77,8 +121,8 @@
       <file leaf-file-name="test.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/out/production/project2/test.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
+            <state relative-caret-position="105">
+              <caret line="7" column="39" selection-start-line="7" selection-start-column="39" selection-end-line="7" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -101,8 +145,8 @@
         <option value="$PROJECT_DIR$/out/production/project2/test.txt" />
         <option value="$PROJECT_DIR$/out/production/project2/tt.txt" />
         <option value="$PROJECT_DIR$/src/tt.txt" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/submit.csv" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
       </list>
     </option>
   </component>
@@ -686,15 +730,15 @@
       <updated>1508207472053</updated>
       <workItem from="1508207473451" duration="3210000" />
       <workItem from="1508289289246" duration="13906000" />
-      <workItem from="1508370343556" duration="5061000" />
+      <workItem from="1508370343556" duration="14774000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22177000" />
+    <option name="totallyTimeSpent" value="31890000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="817" extended-state="0" />
+    <frame x="0" y="23" width="1440" height="817" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -754,6 +798,7 @@
             <element signature="method#insertWord#0;class#Main#0" expanded="false" />
             <element signature="method#search#0;class#Main#0" expanded="false" />
             <element signature="method#handleLineForPart2#0;class#Main#0" expanded="false" />
+            <element signature="method#tag2#0;class#Main#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -792,6 +837,7 @@
             <element signature="method#insertWord#0;class#Main#0" expanded="false" />
             <element signature="method#search#0;class#Main#0" expanded="false" />
             <element signature="method#handleLineForPart2#0;class#Main#0" expanded="false" />
+            <element signature="method#tag2#0;class#Main#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -812,49 +858,82 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/out/production/project2/test.txt">
+    <entry file="file://$PROJECT_DIR$/out/production/project2/train.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
+        <state relative-caret-position="270">
+          <caret line="3875" column="0" selection-start-line="3875" selection-start-column="0" selection-end-line="3877" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/out/production/project2/train.txt">
+    <entry file="file://$PROJECT_DIR$/out/production/project2/test.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="37" />
+        <state relative-caret-position="105">
+          <caret line="7" column="39" selection-start-line="7" selection-start-column="39" selection-end-line="7" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/train_split.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/train_holdout_tag_index.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="37" selection-start-line="1" selection-start-column="32" selection-end-line="1" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/train_holdout.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/train_holdout_tag3.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tt.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="7" selection-end-column="14" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="401" column="24" selection-start-line="401" selection-start-column="24" selection-end-line="401" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#handleLine#0;class#Main#0" expanded="false" />
-            <element signature="method#insertWord#0;class#Main#0" expanded="false" />
-            <element signature="method#search#0;class#Main#0" expanded="false" />
-            <element signature="method#handleLineForPart2#0;class#Main#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/submit.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
-          <caret line="4" column="32764" selection-start-line="4" selection-start-column="32764" selection-end-line="4" selection-end-column="32764" />
+          <caret line="4" column="8" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2082">
+          <caret line="668" column="45" selection-start-line="668" selection-start-column="45" selection-end-line="668" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#handleLine#0;class#Main#0" expanded="false" />
+            <element signature="method#insertWord#0;class#Main#0" expanded="false" />
+            <element signature="method#search#0;class#Main#0" expanded="false" />
+            <element signature="method#handleLineForPart2#0;class#Main#0" expanded="false" />
+            <element signature="method#tag2#0;class#Main#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

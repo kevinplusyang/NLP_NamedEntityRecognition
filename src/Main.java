@@ -235,6 +235,7 @@ public class Main {
     static HashMap<String, Integer> namedTagCountMap = new HashMap<>();
     static HashMap<String, HashMap<String, Integer>> mapStatus = new HashMap<>();
     static ArrayList<Integer> resultList = new ArrayList<>();
+    static double minp;
 
 
     private static void part2() {
@@ -320,9 +321,23 @@ public class Main {
             e.printStackTrace();
         }
 
-//        System.out.println(map1.get("B-LOC").get("NNP").get("DETROIT"));
-//        System.out.println(mapStatus.get("O").get("B-LOC"));
+//        System.out.println(map1.get("O").get("CD").get("16-2"));
+        System.out.println(mapStatus.get("O").get("B-MISC"));
 //        System.out.println(namedTagCountMap.get("B-LOC"));
+
+        minp = 1;
+        for (String k1 : map1.keySet()) {
+            for (String k2 : map1.get(k1).keySet()) {
+                for (String k3 : map1.get(k1).get(k2).keySet()) {
+                    double x = (double)map1.get(k1).get(k2).get(k3) / namedTagCountMap.get(k1);
+                    if (x < minp) {
+                        minp = x;
+                    }
+                }
+            }
+
+        }
+
 
 
 
@@ -373,6 +388,59 @@ public class Main {
             e.printStackTrace();
         }
 
+
+
+//        try {
+//            File file = new File("./src/train_holdout_tag_index.txt");
+//            FileReader fileReader = new FileReader(file);
+//            BufferedReader bufferedReader = new BufferedReader(fileReader);
+//            String line;
+//            int i = 0;
+//            String line1 = "";
+//            String line2 = "";
+//            String line3 = "";
+//            while ((line = bufferedReader.readLine()) != null) {
+//
+//                if (i == 0) {
+//                    line1 = line.toString();
+//                    i++;
+//                } else if (i == 1) {
+//                    line2 = line.toString();
+//                    i++;
+//                } else if (i == 2) {
+//                    line3 = line.toString();
+//                    i++;
+//                }
+//
+//                if (i == 3) {
+//                    String[] line1Array = line1.split("\t");
+//                    String[] line2Array = line2.split("\t");
+//                    String[] line3Array = line3.split(" ");
+//
+//
+//
+//                    i = 0;
+//                    line1 = "";
+//                    line2 = "";
+//                    line3 = "";
+//
+//                    tag2(line1Array, line2Array, line3Array);
+//                }
+//
+//
+//
+//            }
+//            fileReader.close();
+//
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+
+
+
+
 //        System.out.println(resultList.size());
 
         System.out.println("");
@@ -405,6 +473,11 @@ public class Main {
             System.out.print(result);
             System.out.print(" ");
         }
+
+
+
+
+
 
 
 
@@ -447,6 +520,89 @@ public class Main {
 
     }
 
+    private static void tag2(String[] line1Array, String[] line2Array, String[] line3Array) {
+        String[] namedTagArray = {"B-PER", "I-PER", "B-LOC", "I-LOC", "B-ORG", "I-ORG", "B-MISC", "I-MISC", "O"};
+
+        double[][] scoreMatrix = new double[9][line1Array.length];
+
+        int[][] tagMatrix = new int[9][line1Array.length];
+
+
+
+        int[] tempResult = new int[line2Array.length];
+        for (int i = 0 ; i < line2Array.length ;i++) {
+
+            if (line2Array[i].equals("B-PER")) {
+                tempResult[i] = 0;
+            } else if (line2Array[i].equals("I-PER")) {
+                tempResult[i] = 1;
+            } else if (line2Array[i].equals("B-LOC")) {
+                tempResult[i] = 2;
+            } else if (line2Array[i].equals("I-LOC")) {
+                tempResult[i] = 3;
+            } else if (line2Array[i].equals("B-ORG")) {
+                tempResult[i] = 4;
+            } else if (line2Array[i].equals("I-ORG")) {
+                tempResult[i] = 5;
+            } else if (line2Array[i].equals("B-MISC")) {
+                tempResult[i] = 6;
+            } else if (line2Array[i].equals("I-MISC")) {
+                tempResult[i] = 7;
+            } else if (line2Array[i].equals("O")) {
+                tempResult[i] = 8;
+            }
+        }
+
+
+
+
+        int i = 0;
+        while (i < tempResult.length) {
+//            System.out.println(i);
+            if (tempResult[i] == 1 || tempResult[i] == 3 || tempResult[i] == 5 || tempResult[i] == 7 || tempResult[i] == 8 || tempResult[i] == 9) {
+                i++;
+            } else {
+                int start = i;
+                int end = i;
+                int j = i + 1;
+                String type = "";
+
+                if (tempResult[i] == 0) {
+                    type = "PER";
+                    while (j < tempResult.length && tempResult[j] == 1) {
+                        j++;
+                    }
+                } else if (tempResult[i] == 2) {
+                    type = "LOC";
+                    while (j < tempResult.length && tempResult[j] == 3) {
+                        j++;
+                    }
+                } else if (tempResult[i] == 4) {
+                    type = "ORG";
+                    while (j < tempResult.length && tempResult[j] == 5) {
+                        j++;
+                    }
+                } else if (tempResult[i] == 6) {
+                    while (j < tempResult.length && tempResult[j] == 7) {
+                        j++;
+                    }
+                    type = "MISC";
+                }
+                end = j - 1;
+
+
+                map.get(type).add(line3Array[start] + "-" + line3Array[end]);
+                i = j;
+
+            }
+
+        }
+
+
+
+
+
+    }
 
     private static void tag(String[] line1Array, String[] line2Array, String[] line3Array) {
 
@@ -466,10 +622,11 @@ public class Main {
                     double tempScore;
 
                     try {
-                        tempScore = (double)map1.get(namedTagArray[j]).get(posTag).getOrDefault(word, 1) / namedTagCountMap.get(namedTagArray[j]);
+                        tempScore = (double)map1.get(namedTagArray[j]).get(posTag).get(word)/ namedTagCountMap.get(namedTagArray[j]);
 
                     } catch (NullPointerException e) {
-                        tempScore = (double)1 / namedTagCountMap.get(namedTagArray[j]);
+//                        tempScore = (double)0.1 / namedTagCountMap.get(namedTagArray[j]);
+                        tempScore = minp / 10;
                     }
 
 
@@ -505,13 +662,15 @@ public class Main {
                     double tempScore = 0;
 
                     try {
-                        tempScore = (double)map1.get(namedTagArray[j]).get(posTag).getOrDefault(word, 1);
+                        tempScore = (double)map1.get(namedTagArray[j]).get(posTag).get(word) / namedTagCountMap.get(namedTagArray[j]);
 
                     } catch (NullPointerException e) {
-                        tempScore = (double)1;
+//                        tempScore = (double)0.1;
+                        tempScore = minp / 10;
+
                     }
 
-                    scoreMatrix[j][i] =  Math.log((double) tempScore / namedTagCountMap.get(namedTagArray[j]));
+                    scoreMatrix[j][i] =  Math.log((double) tempScore );
 
                     scoreMatrix[j][i] += maxValue;
 
@@ -552,7 +711,21 @@ public class Main {
         }
 
 
+//        for (int i = 0; i < tempResult.length; i++) {
+//            if (tempResult[i] == 6 || tempResult[i] == 7) {
+//                System.out.print(line1Array[i] + " ");
+//            }
+//        }
+//        System.out.println("");
+
+
 //        System.out.println(resultList.size());
+
+
+
+
+
+
 
         int i = 0;
         while (i < tempResult.length) {
@@ -588,11 +761,11 @@ public class Main {
                 }
                 end = j - 1;
 
-//                System.out.println("Lenght" + tempResult.length);
-//                System.out.println("Lenght" + line3Array.length);
-//                System.out.println("Lenght" + line1Array.length);
-//                System.out.println("start" + start);
-//                System.out.println("end" + end);
+                System.out.println("Lenght" + tempResult.length);
+                System.out.println("Lenght" + line3Array.length);
+                System.out.println("Lenght" + line1Array.length);
+                System.out.println("start" + start);
+                System.out.println("end" + end);
 
                 map.get(type).add(line3Array[start] + "-" + line3Array[end]);
                 i = j;
@@ -603,6 +776,12 @@ public class Main {
             }
 
         }
+
+
+
+
+
+
 
 
 
