@@ -1,3 +1,16 @@
+played	on	Monday	(	home	team	in	CAPS	)	:
+VBD	IN	NNP	(	NN	NN	IN	NNP	)	:
+O	O	O	O	O	O	O	O	O	O
+0 1 2 3 4 5 6 7 8 9
+American	League
+NNP	NNP
+10 11
+B-MISC	I-MISC
 Cleveland	2	DETROIT	1
 NNP	CD	NNP	CD
+12 13 14 15
 B-ORG	O	B-ORG	O
+BALTIMORE	12	Oakland	11	(	10	innings	)
+VB	CD	NNP	CD	(	CD	NN	)
+16 17 18 19 20 21 22 23
+B-ORG	O	B-ORG	O	O	O	O	O

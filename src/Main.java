@@ -104,10 +104,10 @@ public class Main {
 //            e.printStackTrace();
 //        }
 //
-//        map.put("PER", new ArrayList<>());
-//        map.put("LOC", new ArrayList<>());
-//        map.put("ORG", new ArrayList<>());
-//        map.put("MISC", new ArrayList<>());
+        map.put("PER", new ArrayList<>());
+        map.put("LOC", new ArrayList<>());
+        map.put("ORG", new ArrayList<>());
+        map.put("MISC", new ArrayList<>());
 //
 //
 //        search();
@@ -239,6 +239,11 @@ public class Main {
 
     private static void part2() {
 
+        map.put("PER", new ArrayList<>());
+        map.put("LOC", new ArrayList<>());
+        map.put("ORG", new ArrayList<>());
+        map.put("MISC", new ArrayList<>());
+
         namedTagCountMap.put("B-PER", 0);
         namedTagCountMap.put("I-PER", 0);
         namedTagCountMap.put("B-LOC", 0);
@@ -300,6 +305,8 @@ public class Main {
                     line1 = "";
                     line2 = "";
                     line3 = "";
+
+
                     handleLineForPart2(line1Array, line2Array, line3Array);
                 }
 
@@ -344,7 +351,7 @@ public class Main {
                 if (i == 3) {
                     String[] line1Array = line1.split("\t");
                     String[] line2Array = line2.split("\t");
-                    String[] line3Array = line3.split("\t");
+                    String[] line3Array = line3.split(" ");
 
 
 
@@ -352,6 +359,7 @@ public class Main {
                     line1 = "";
                     line2 = "";
                     line3 = "";
+
                     tag(line1Array, line2Array, line3Array);
                 }
 
@@ -365,7 +373,38 @@ public class Main {
             e.printStackTrace();
         }
 
-        System.out.println(resultList.size());
+//        System.out.println(resultList.size());
+
+        System.out.println("");
+        System.out.print("PER,");
+        for (String result : map.get("PER")) {
+            System.out.print(result);
+            System.out.print(" ");
+        }
+
+        System.out.println("");
+        System.out.print("LOC,");
+
+        for (String result : map.get("LOC")) {
+            System.out.print(result);
+            System.out.print(" ");
+        }
+
+        System.out.println("");
+        System.out.print("ORG,");
+
+        for (String result : map.get("ORG")) {
+            System.out.print(result);
+            System.out.print(" ");
+        }
+
+        System.out.println("");
+        System.out.print("MISC,");
+
+        for (String result : map.get("MISC")) {
+            System.out.print(result);
+            System.out.print(" ");
+        }
 
 
 
@@ -511,6 +550,60 @@ public class Main {
         for (int i = 0 ; i < tempResult.length ;i++) {
             resultList.add(tempResult[i]);
         }
+
+
+//        System.out.println(resultList.size());
+
+        int i = 0;
+        while (i < tempResult.length) {
+//            System.out.println(i);
+            if (tempResult[i] == 1 || tempResult[i] == 3 || tempResult[i] == 5 || tempResult[i] == 7 || tempResult[i] == 8 || tempResult[i] == 9) {
+                i++;
+            } else {
+                int start = i;
+                int end = i;
+                int j = i + 1;
+                String type = "";
+
+                if (tempResult[i] == 0) {
+                    type = "PER";
+                    while (j < tempResult.length && tempResult[j] == 1) {
+                        j++;
+                    }
+                } else if (tempResult[i] == 2) {
+                    type = "LOC";
+                    while (j < tempResult.length && tempResult[j] == 3) {
+                        j++;
+                    }
+                } else if (tempResult[i] == 4) {
+                    type = "ORG";
+                    while (j < tempResult.length && tempResult[j] == 5) {
+                        j++;
+                    }
+                } else if (tempResult[i] == 6) {
+                    while (j < tempResult.length && tempResult[j] == 7) {
+                        j++;
+                    }
+                    type = "MISC";
+                }
+                end = j - 1;
+
+//                System.out.println("Lenght" + tempResult.length);
+//                System.out.println("Lenght" + line3Array.length);
+//                System.out.println("Lenght" + line1Array.length);
+//                System.out.println("start" + start);
+//                System.out.println("end" + end);
+
+                map.get(type).add(line3Array[start] + "-" + line3Array[end]);
+                i = j;
+//                if (i == j) {
+//                    i++;
+//                }
+//                System.out.println("j" + j);
+            }
+
+        }
+
 
 
     }
